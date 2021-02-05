@@ -18,15 +18,15 @@ void seg_display(int16_t value){
 	value = value - digit * 10;
 	digit1 = value;
 	
-	for(t=0; t<15; t++){
+	for(t=0; t<16; t++){
 		
 		close_seven_segment();
 		show_seven_segment(1,digit);
-		DrvSYS_Delay(6000);
+		DrvSYS_Delay(62500);
 		
 		close_seven_segment();
 		show_seven_segment(0,digit1);
-		DrvSYS_Delay(6000);
+		DrvSYS_Delay(62500);
 	}
 	close_seven_segment();
 }
@@ -69,15 +69,29 @@ void SecondTask(){
 }
 
 void ThirdTask(){
-	DrvGPIO_ClrBit(E_GPA,12);
-	DrvSYS_Delay(300000);
-	DrvGPIO_SetBit(E_GPC,12);
-	DrvGPIO_ClrBit(E_GPC,13); //output Low to turn on LED
-	DrvSYS_Delay(300000);
-	DrvGPIO_SetBit(E_GPC,13);
-	DrvGPIO_ClrBit(E_GPC,14); //output Low to turn on LED
-	DrvSYS_Delay(300000);
-	DrvGPIO_SetBit(E_GPC,14);
+	DrvGPIO_ClrBit(E_GPA,12); // GPA12 = Blue,  0 : on, 1 : off
+  DrvGPIO_SetBit(E_GPA,13); 
+  DrvGPIO_SetBit(E_GPA,14); 
+	DrvSYS_Delay(1000000); 		   
+
+	// set RGBled to Green
+  DrvGPIO_SetBit(E_GPA,12); 
+  DrvGPIO_ClrBit(E_GPA,13); // GPA13 = Green, 0 : on, 1 : off
+  DrvGPIO_SetBit(E_GPA,14); 
+	DrvSYS_Delay(1000000);			  
+
+	// set RGBled to Red
+  DrvGPIO_SetBit(E_GPA,12); 
+  DrvGPIO_SetBit(E_GPA,13); 
+  DrvGPIO_ClrBit(E_GPA,14); // GPA14 = Red,   0 : on, 1 : off
+	DrvSYS_Delay(1000000);			  
+	
+	// set RGBled to off	 
+  DrvGPIO_SetBit(E_GPA,12); // GPA12 = Blue,  0 : on, 1 : off
+  DrvGPIO_SetBit(E_GPA,13); // GPA13 = Green, 0 : on, 1 : off
+  DrvGPIO_SetBit(E_GPA,14); // GPA14 = Red,   0 : on, 1 : off
+	DrvSYS_Delay(1000000);
+	
 }
 
 void FourthTask(int number){ //initialize Buzz_GPIO
