@@ -18,15 +18,15 @@ void seg_display(int16_t value){
 	value = value - digit * 10;
 	digit1 = value;
 	
-	for(t=0; t<16; t++){
+	for(t=0; t<30; t++){
 		
 		close_seven_segment();
 		show_seven_segment(1,digit);
-		DrvSYS_Delay(62500);
+		DrvSYS_Delay(6000);
 		
 		close_seven_segment();
 		show_seven_segment(0,digit1);
-		DrvSYS_Delay(62500);
+		DrvSYS_Delay(6000);
 	}
 	close_seven_segment();
 }
